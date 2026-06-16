@@ -1,0 +1,5 @@
+{                                                                                                                                                                                                                                                                                           
+   "name": "teradata-trial-data-loading",                                                     
+   "description": "A Skill that guides an AI agent through discovering and loading demo/sample datasets into a Teradata Trial (formerly ClearScape Analytics Experience) environment.",
+   "version": "1.0.0"
+}
