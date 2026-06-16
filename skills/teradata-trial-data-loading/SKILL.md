@@ -41,8 +41,17 @@ Teradata — the tool names may vary (execute_query, execute_statement, run_sql,
 Use whatever SQL execution tool is available in the current session.
 
 ---
+## Step 1: Verify that you can connect to Teradata Trial / ClearScape Analytics Experience
 
-## Step 1: Verify This Is a Teradata Trial / ClearScape Environment
+**This is a critical gate.** Before doing anything else, confirm that you can connect to a Teradata system.
+1. Ensure that you have the tools necessary, thesis may be
+ - A Teradata MCP server connection with the ability to execute SQL queries (list MCP tools and look for `base_readQuery`, `execute_statement`, `run_sql`, `query`, etc.).
+ - Access to an appropriate CLI tool (`bteq`, `tq`...) and know connection parameters (host, port, username, password).
+ - Access to a programming library (Python `teradatasql`, JDBC `terajdbc`, ...) and know connection parameters (host, port, username, password).
+ 2. If more than one option is available, clarify the target Teradata system with the user. 
+
+
+## Step 2: Verify This Is a Teradata Trial / ClearScape Environment
 
 **This is a critical gate.** Before doing anything else, confirm two things:
 
@@ -72,7 +81,7 @@ WHERE DatabaseName = 'demo_user' AND TableName = 'get_data';
 
 ---
 
-## Step 2: Discover Available Datasets and What's Already Loaded
+## Step 3: Discover Available Datasets and What's Already Loaded
 
 Run both queries together so you can cross-reference what's available vs. what's already present:
 
@@ -104,7 +113,7 @@ See `references/dataset-catalog.md` for the full categorized catalog to help use
 
 ---
 
-## Step 3: Guide the User to the Right Dataset
+## Step 4: Guide the User to the Right Dataset
 
 Ask the user what kind of data or use case they have in mind, then match to a category:
 
@@ -125,7 +134,7 @@ what each contains before asking them to choose.
 
 ---
 
-## Step 4: Load the Dataset (if not already present)
+## Step 5: Load the Dataset (if not already present)
 
 Before calling `get_data`, check whether the dataset is already loaded by looking for
 its `_db` database. A dataset named `DEMO_AustinBikeShare_local` creates `DEMO_AustinBikeShare_db`:
@@ -159,7 +168,7 @@ ORDER BY DatabaseName;
 
 ---
 
-## Step 5: Confirm What Was Loaded
+## Step 6: Confirm What Was Loaded
 
 After hydration, list the tables in the new database so the user can see what's available:
 
@@ -176,7 +185,7 @@ Use `describe_table` (or `DBC.ColumnsV`) to show column details for the most imp
 
 ---
 
-## Step 6: Suggest Next Steps
+## Step 7: Suggest Next Steps
 
 After confirming the load, suggest what the user can do next based on the dataset:
 
@@ -208,7 +217,7 @@ This drops the databases created by the corresponding `get_data` call.
 ## MCP Tool Compatibility
 
 This skill works with any MCP that can execute SQL against Teradata. Common tool names to look for:
-- `execute_query` / `execute_statement` (tdsql-dev, teradata-ce)
+- `execute_query` / `base_readQuery` / `execute_statement` (tdsql-dev, teradata-ce)
 - `run_sql` / `query` (other Teradata MCP variants)
 - Any tool whose description mentions Teradata SQL execution
 
